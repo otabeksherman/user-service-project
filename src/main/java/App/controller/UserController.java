@@ -3,35 +3,11 @@ package App.controller;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static App.controller.UtilController.*;
+
 public class UserController {
 
-    private static boolean checkEmailValid(String email){
-        if (email == null) {
-            System.out.println("Email field is empty");
-            return false;
-        }
-        return  checkRegex("^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^-]+(?:\\.[a-zA-Z0-9_!#$%&'*+/=?`{|}~^-]+)*@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*$"
-                ,email);
-    }
-    private static  boolean checkNameValid(String name){
-        if (name == null) {
-            System.out.println("App.User name field is empty");
-            return false;
-        }
-        return  checkRegex("[A-Z]+[a-z]+",name);
-    }
-    private static boolean checkPasswordValid(String password) {
-        if (password == null) {
-            System.out.println("password field is empty");
-            return false;
-        }
-       return checkRegex("^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$", password);
-    }
-    private static boolean checkRegex(String regex, String name){
-        Pattern p = Pattern.compile(regex);
-        Matcher m = p.matcher(name);
-        return m.matches();
-    }
+
 
     public static void registerNewUser( String email, String name, String password){
         if(!checkEmailValid(email)){
