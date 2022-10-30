@@ -1,4 +1,4 @@
-class User {
+ class User {
     private final int id;
     private String email;
     private String name;
@@ -10,4 +10,5 @@ class User {
         this.name = name;
         this.password = password;
     }
+
 }
