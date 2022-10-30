@@ -1,4 +1,4 @@
-package controller;
+package App.controller;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -15,7 +15,7 @@ public class UserController {
     }
     private static  boolean checkNameValid(String name){
         if (name == null) {
-            System.out.println("User name field is empty");
+            System.out.println("App.User name field is empty");
             return false;
         }
         return  checkRegex("[A-Z]+[a-z]+",name);
@@ -47,11 +47,11 @@ public class UserController {
             return;
         }
 
-        //User newUser= createUser(name, email,password);// not connect yet( belong to service method)
+        //App.User newUser= createUser(name, email,password);// not connect yet( belong to service method)
 
 
         //service method to create user
-        //notify to client new user created. (print)
+        //notify to App.client new user created. (print)
     }
 
 }
