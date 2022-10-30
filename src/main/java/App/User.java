@@ -1,3 +1,5 @@
+package App;
+
 public class User {
     private final int id;
     private String email;
