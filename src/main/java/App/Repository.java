@@ -1,3 +1,5 @@
+package App;
+
 import com.google.gson.Gson;
 
 import java.io.FileWriter;
@@ -5,7 +7,7 @@ import java.io.IOException;
 
 public class Repository {
 
-    private static final String USERS_REPO_PATH = "src/main/java/Repository/users/";
+    private static final String USERS_REPO_PATH = "src/main/java/App.Repository/users/";
 
     void writeUser(User user) {
         Gson gson = new Gson();
