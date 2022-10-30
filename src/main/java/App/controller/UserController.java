@@ -6,9 +6,6 @@ import java.util.regex.Pattern;
 import static App.controller.UtilController.*;
 
 public class UserController {
-
-
-
     public static void registerNewUser( String email, String name, String password){
         if(!checkEmailValid(email)){
             System.out.println("email field invalid");
@@ -23,11 +20,50 @@ public class UserController {
             return;
         }
 
-        //App.User newUser= createUser(name, email,password);// not connect yet( belong to service method)
 
+        //add that after merge with userService
+        /*
+         newUser= createUser(name, email,password);
+        if(newUser.get() != null){
+            System.out.println("Create user successfully");
+        }*/
+    }
 
-        //service method to create user
-        //notify to App.client new user created. (print)
+    public static void updateUserEmail(String email, Long token){
+        if(!checkEmailValid(email)){
+            System.out.println("email invalid");
+        }else {
+        /*
+        UserService.updateUserEmail(email,token);
+         */
+        }
+    }
+    public static void updateUserName(String name, Long token){
+        if(!checkNameValid(name)){
+            System.out.println("name invalid");
+        }else {
+        /*
+        UserService.updateUserName(name,token);
+         */
+        }
+
+    }public static void updateUserPassword(String password, Long token){
+        if(!checkPasswordValid(password)){
+            System.out.println("password invalid");
+        }else {
+        /*
+        UserService.updateUserPassword(password,token);
+         */
+        }
+    }
+    public static void deleteUser(String email, String password,Long token){
+        if(!(checkEmailValid(email)|| !(checkPasswordValid(password)))){
+            System.out.println("email/password invalid!");
+        }
+        /*
+        UserService.deleteUser(email,password,token);
+         */
+
     }
 
 }
