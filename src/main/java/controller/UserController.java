@@ -5,7 +5,7 @@ import java.util.regex.Pattern;
 
 public class UserController {
 
-    private boolean checkEmailValid(String email){
+    private static boolean checkEmailValid(String email){
         if (email == null) {
             System.out.println("Email field is empty");
             return false;
@@ -13,27 +13,27 @@ public class UserController {
         return  checkRegex("^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^-]+(?:\\.[a-zA-Z0-9_!#$%&'*+/=?`{|}~^-]+)*@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*$"
                 ,email);
     }
-    private boolean checkNameValid(String name){
+    private static  boolean checkNameValid(String name){
         if (name == null) {
             System.out.println("User name field is empty");
             return false;
         }
         return  checkRegex("[A-Z]+[a-z]+",name);
     }
-    private boolean checkPasswordValid(String password) {
+    private static boolean checkPasswordValid(String password) {
         if (password == null) {
             System.out.println("password field is empty");
             return false;
         }
        return checkRegex("^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$", password);
     }
-    private boolean checkRegex(String regex, String name){
+    private static boolean checkRegex(String regex, String name){
         Pattern p = Pattern.compile(regex);
         Matcher m = p.matcher(name);
         return m.matches();
     }
 
-    public void registerNewUser( String email, String name, String password){
+    public static void registerNewUser( String email, String name, String password){
         if(!checkEmailValid(email)){
             System.out.println("email field invalid");
             return;
