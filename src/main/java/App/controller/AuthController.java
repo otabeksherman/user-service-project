@@ -1,5 +1,7 @@
 package App.controller;
 
+import App.service.AuthenticationService;
+
 import java.util.Optional;
 import java.util.OptionalLong;
 
@@ -16,10 +18,9 @@ public class AuthController {
             return null;
         }
 
-        //AuthService service=new AuthService();
-        //return service.login(email,password);
-        return null;
-        //remove that after get AuthService
+        AuthenticationService service=new AuthenticationService();
+        return service.loginUser(email,password);// need changes to email and password
+
     }
 
 

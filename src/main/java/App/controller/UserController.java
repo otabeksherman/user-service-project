@@ -1,4 +1,6 @@
 package App.controller;
+import App.service.AuthenticationService;
+
 import static App.controller.UtilController.*;
 
 public class UserController {
@@ -25,40 +27,40 @@ public class UserController {
         }*/
     }
 
-    public static void updateUserEmail(String email, Long token){
+    public static void updateUserEmail(Long id,String email){
         if(!checkEmailValid(email)){
             System.out.println("email invalid");
         }else {
-        /*
-        UserService.updateUserEmail(email,token);
-         */
+
+        AuthenticationService.updateEmail(id, email);
+
         }
     }
-    public static void updateUserName(String name, Long token){
+    public static void updateUserName(Long id,String name){
         if(!checkNameValid(name)){
             System.out.println("name invalid");
         }else {
-        /*
-        UserService.updateUserName(name,token);
-         */
+
+        AuthenticationService.updateName(id, name);
+
         }
 
-    }public static void updateUserPassword(String password, Long token){
+    }public static void updateUserPassword(Long id,String password){
         if(!checkPasswordValid(password)){
             System.out.println("password invalid");
         }else {
-        /*
-        UserService.updateUserPassword(password,token);
-         */
+
+        AuthenticationService.userUpdatePassword(id ,password);
+
         }
     }
-    public static void deleteUser(String email, String password,Long token){
+    public static void deleteUser(String email, String password){
         if(!(checkEmailValid(email)|| !(checkPasswordValid(password)))){
             System.out.println("email/password invalid!");
         }
-        /*
-        UserService.deleteUser(email,password,token);
-         */
+
+        AuthenticationService.deleteUser(id,password);
+
 
     }
 
