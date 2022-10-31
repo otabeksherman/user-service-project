@@ -7,7 +7,6 @@ import static App.controller.UtilController.*;
 public class UserController {
     private static UserService userService= new UserService();
 
-
     public static void updateUserEmail(long id,Long token, String email){
         if(!checkEmailValid(email)){
             System.out.println("email invalid");
