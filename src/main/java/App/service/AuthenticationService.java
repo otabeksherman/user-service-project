@@ -29,7 +29,7 @@ public class AuthenticationService {
         System.out.println("user registered successfully");
     }
 
-    public long logIn(String email, String password) {
+    public Long logIn(String email, String password) {
 
         Optional<User> user =  repository.getUserByEmail(email);
 

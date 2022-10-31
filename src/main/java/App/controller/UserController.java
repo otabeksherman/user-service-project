@@ -1,67 +1,36 @@
 package App.controller;
 import App.service.AuthenticationService;
+import App.service.UserService;
 
 import static App.controller.UtilController.*;
 
 public class UserController {
-    public static void registerNewUser( String email, String name, String password){
-        if(!checkEmailValid(email)){
-            System.out.println("email field invalid");
-            return;
-        }
-        if(!checkNameValid(name)){
-            System.out.println("name field invalid");
-            return;
-        }
-        if(!checkPasswordValid(password)){
-            System.out.println("password must include minimum eight characters, at least one letter and one number");
-            return;
-        }
+    private static UserService userService= new UserService();
 
 
-        //add that after merge with userService
-        /*
-         newUser= createUser(name, email,password);
-        if(newUser.get() != null){
-            System.out.println("Create user successfully");
-        }*/
-    }
-
-    public static void updateUserEmail(Long id,String email){
+    public static void updateUserEmail(long id,Long token, String email){
         if(!checkEmailValid(email)){
             System.out.println("email invalid");
         }else {
-
-        AuthenticationService.updateEmail(id, email);
-
+            userService.updateEmail(id,token, email);
         }
     }
-    public static void updateUserName(Long id,String name){
+    public static void updateUserName(long id,Long token,String name){
         if(!checkNameValid(name)){
             System.out.println("name invalid");
         }else {
-
-        AuthenticationService.updateName(id, name);
-
+            userService.updateName(id,token,name);
         }
 
-    }public static void updateUserPassword(Long id,String password){
+    }public static void updateUserPassword(long id,Long token,String password){
         if(!checkPasswordValid(password)){
             System.out.println("password invalid");
         }else {
-
-        AuthenticationService.userUpdatePassword(id ,password);
-
+            userService.userUpdatePassword(id ,token,password);
         }
     }
-    public static void deleteUser(String email, String password){
-        if(!(checkEmailValid(email)|| !(checkPasswordValid(password)))){
-            System.out.println("email/password invalid!");
-        }
-
-        AuthenticationService.deleteUser(id,password);
-
-
+    public static void deleteUser(long id,Long token){
+        userService.deleteUser(id,token);
     }
 
 }
