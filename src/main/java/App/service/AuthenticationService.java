@@ -12,7 +12,7 @@ public class AuthenticationService {
     private Set<Long> tokenSet = new HashSet<>();
     private TokenService tokenService = new TokenService();
 
-    public User createUser(String name, String email, String password) {
+    public Long createUser(String name, String email, String password) {
         Optional<List<String>> emails = repository.getEmails();
 
         if (emails.isPresent()) {
@@ -27,7 +27,7 @@ public class AuthenticationService {
         User newUser = new User(userIdNum, name, email, password);
         repository.writeUser(newUser);
         System.out.println("user registered successfully");
-        return newUser;
+        return userIdNum;
     }
 
     public Long logIn(String email, String password) {

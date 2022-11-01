@@ -14,7 +14,7 @@ public class AuthController {
 
     private static AuthenticationService authService= new AuthenticationService();
 
-    public static User registerNewUser(String name, String email, String password){
+    public static Long registerNewUser(String name, String email, String password){
         if(!checkEmailValid(email)){
             System.out.println("email field invalid");
             return null;

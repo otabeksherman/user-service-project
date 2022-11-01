@@ -19,12 +19,13 @@ public class UtilController {
         }
         return  checkRegex("[A-Z]+[a-z]+",name);
     }
-    static boolean checkPasswordValid(String password) {//at least 8 character 1 letter and 1 digit
+
+    static boolean checkPasswordValid(String password) {
         if (password == null) {
             System.out.println("password field is empty");
             return false;
         }
-        return checkRegex("^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$", password);
+        return checkRegex("^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$", password);//regex expression: at least 8 character 1 letter and 1 digit
     }
 
 
