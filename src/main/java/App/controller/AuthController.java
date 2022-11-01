@@ -1,5 +1,6 @@
 package App.controller;
 
+import App.User;
 import App.service.AuthenticationService;
 import App.service.UserService;
 
@@ -13,24 +14,24 @@ public class AuthController {
 
     private static AuthenticationService authService= new AuthenticationService();
 
-    public static void registerNewUser( String name, String email, String password){
+    public static User registerNewUser(String name, String email, String password){
         if(!checkEmailValid(email)){
             System.out.println("email field invalid");
-            return;
+            return null;
         }
         if(!checkNameValid(name)){
             System.out.println("name field invalid");
-            return;
+            return null;
         }
         if(!checkPasswordValid(password)){
             System.out.println("password must include minimum eight characters, at least one letter and one number");
-            return;
+            return null;
         }
 
-        authService.createUser(name, email, password);
+        return authService.createUser(name, email, password);
     }
 
-    public OptionalLong login(String email, String password){
+    public static Long login(String email, String password){
         if(!checkEmailValid(email)){
             System.out.println("email field invalid");
             return null;
@@ -39,9 +40,8 @@ public class AuthController {
             System.out.println("password must include minimum eight characters, at least one letter and one number");
             return null;
         }
-
         Long token=authService.logIn(email, password);
-       return OptionalLong.of(token);
+       return token;
     }
 
 
