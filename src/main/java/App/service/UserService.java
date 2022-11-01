@@ -27,6 +27,7 @@ public class UserService {
                 User updatedUser = new User(user.get().getId(),
                         user.get().getEmail(), newName, user.get().getPassword());
                 repository.updateUser(updatedUser);
+                System.out.println("User Name updated successfully");
             } else {
                 System.out.println("Can't update name");
             }
@@ -43,6 +44,7 @@ public class UserService {
                 User updatedUser = new User(user.get().getId(),
                         newEmail, user.get().getName(), user.get().getPassword());
                 repository.updateUser(updatedUser);
+                System.out.println("User Email updated successfully");
             } else {
                 System.out.println("Can't update email");
             }
@@ -59,6 +61,7 @@ public class UserService {
                 User updatedUser = new User(user.get().getId(),
                         user.get().getEmail(), user.get().getName(), newPassword);
                 repository.updateUser(updatedUser);
+                System.out.println("User Password updated successfully");
             } else {
                 System.out.println("Can't update password");
             }
@@ -72,8 +75,9 @@ public class UserService {
         if (id != null) {
             Optional<User> user = repository.getUserById(id);
             if (user.isPresent()) {
-                repository.deleteUser(user.get());
-
+                if (repository.deleteUser(user.get())){
+                    System.out.println("User Account deleted successfully");
+                }
             } else {
                 System.out.println("Can't delete user.");
             }

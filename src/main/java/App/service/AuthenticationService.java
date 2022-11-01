@@ -17,16 +17,16 @@ public class AuthenticationService {
 
         if (emails.isPresent()) {
             if (emails.get().contains(email)) {
-                System.out.println(("User already registered with this email"));
+                System.out.println(("Account with given Email already exists"));
                 return null;
             }
         }
 
         UniqueNumber userId = new UniqueNumber();
         long userIdNum = userId.getID();
-        User newUser = new User(userIdNum, name, email, password);
+        User newUser = new User(userIdNum, email, name, password);
         repository.writeUser(newUser);
-        System.out.println("user registered successfully");
+        System.out.println("User registered successfully");
         return userIdNum;
     }
 
@@ -38,7 +38,7 @@ public class AuthenticationService {
             System.out.println(String.format("User with email %s doesn't exists.", email));
         }
         if (!user.get().getPassword().equals(password)) {
-            System.out.println("Wrong password for given!");
+            System.out.println("Error! Incorrect password!");
         }
 
         Long token;
