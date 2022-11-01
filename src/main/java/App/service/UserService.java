@@ -8,6 +8,8 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
+import static App.service.TokenService.getIDFromToken;
+
 public class UserService {
 
     private Repository repository = Repository.getInstance();
@@ -17,9 +19,10 @@ public class UserService {
     private Set<Long> loggedIdUsers = new HashSet<>();
     private TokenService tokenService = new TokenService();
 
-    public void updateName(long id, long token, String newName) {
-        if (tokenService.tokenIsValid(token, id)) {
-            Optional<User> user = this.repository.getUserById(id);
+    public void updateName(long token, String newName) {
+        Long id=getIDFromToken(token);
+        if (id !=null) {
+            Optional<User> user = repository.getUserById(getIDFromToken(id));
             if (user.isPresent()) {
                 User updatedUser = new User(user.get().getId(),
                         newName, user.get().getEmail(), user.get().getPassword());
@@ -32,9 +35,10 @@ public class UserService {
         }
     }
 
-    public void updateEmail(long id, long token, String newEmail) {
-        if (tokenService.tokenIsValid(token, id)) {
-            Optional<User> user = this.repository.getUserById(id);
+    public void updateEmail( long token, String newEmail) {
+        Long id=getIDFromToken(token);
+        if (id !=null) {
+            Optional<User> user = repository.getUserById(getIDFromToken(id));
             if (user.isPresent() && !repository.getUserByEmail(newEmail).isPresent()) {
                 User updatedUser = new User(user.get().getId(),
                         user.get().getName(), newEmail, user.get().getPassword());
@@ -47,9 +51,10 @@ public class UserService {
         }
     }
 
-    public void userUpdatePassword(long id, long token, String newPassword) {
-        if (tokenService.tokenIsValid(token, id)) {
-            Optional<User> user = this.repository.getUserById(id);
+    public void userUpdatePassword( long token, String newPassword) {
+        Long id=getIDFromToken(token);
+        if (id !=null) {
+            Optional<User> user = repository.getUserById(getIDFromToken(id));
             if (user.isPresent()) {
                 User updatedUser = new User(user.get().getId(),
                         user.get().getName(), user.get().getEmail(), newPassword);
@@ -62,9 +67,10 @@ public class UserService {
         }
     }
 
-    public void deleteUser(long id, long token) {
-        if (tokenService.tokenIsValid(token, id)) {
-            Optional<User> user = repository.getUserById(id);
+    public void deleteUser( long token) {
+        Long id=getIDFromToken(token);
+        if (id !=null) {
+            Optional<User> user = repository.getUserById(getIDFromToken(id));
             if (user.isPresent()) {
                 repository.deleteUser(user.get());
 
