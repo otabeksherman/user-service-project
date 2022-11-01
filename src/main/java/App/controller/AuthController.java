@@ -1,11 +1,6 @@
 package App.controller;
 
-import App.User;
 import App.service.AuthenticationService;
-import App.service.UserService;
-
-import java.util.Optional;
-import java.util.OptionalLong;
 
 import static App.controller.UtilController.*;
 
@@ -14,7 +9,7 @@ public class AuthController {
 
     private static AuthenticationService authService= new AuthenticationService();
 
-    public static Long registerNewUser(String name, String email, String password){
+    public static Long registerNewUser(String email, String name, String password){
         if(!checkEmailValid(email)){
             System.out.println("email field invalid");
             return null;
@@ -41,7 +36,7 @@ public class AuthController {
             return null;
         }
         Long token=authService.logIn(email, password);
-       return token;
+        return token;
     }
 
 

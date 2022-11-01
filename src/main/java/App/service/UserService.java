@@ -20,12 +20,12 @@ public class UserService {
     private TokenService tokenService = new TokenService();
 
     public void updateName(long token, String newName) {
-        Long id=getIDFromToken(token);
-        if (id !=null) {
-            Optional<User> user = repository.getUserById(getIDFromToken(id));
+        Long id = getIDFromToken(token);
+        if (id != null) {
+            Optional<User> user = repository.getUserById(id);
             if (user.isPresent()) {
                 User updatedUser = new User(user.get().getId(),
-                        newName, user.get().getEmail(), user.get().getPassword());
+                        user.get().getEmail(), newName, user.get().getPassword());
                 repository.updateUser(updatedUser);
             } else {
                 System.out.println("Can't update name");
@@ -36,12 +36,12 @@ public class UserService {
     }
 
     public void updateEmail( long token, String newEmail) {
-        Long id=getIDFromToken(token);
-        if (id !=null) {
-            Optional<User> user = repository.getUserById(getIDFromToken(id));
+        Long id = getIDFromToken(token);
+        if (id != null) {
+            Optional<User> user = repository.getUserById(id);
             if (user.isPresent() && !repository.getUserByEmail(newEmail).isPresent()) {
                 User updatedUser = new User(user.get().getId(),
-                        user.get().getName(), newEmail, user.get().getPassword());
+                        newEmail, user.get().getName(), user.get().getPassword());
                 repository.updateUser(updatedUser);
             } else {
                 System.out.println("Can't update email");
@@ -52,12 +52,12 @@ public class UserService {
     }
 
     public void userUpdatePassword( long token, String newPassword) {
-        Long id=getIDFromToken(token);
-        if (id !=null) {
-            Optional<User> user = repository.getUserById(getIDFromToken(id));
+        Long id = getIDFromToken(token);
+        if (id != null) {
+            Optional<User> user = repository.getUserById(id);
             if (user.isPresent()) {
                 User updatedUser = new User(user.get().getId(),
-                        user.get().getName(), user.get().getEmail(), newPassword);
+                        user.get().getEmail(), user.get().getName(), newPassword);
                 repository.updateUser(updatedUser);
             } else {
                 System.out.println("Can't update password");
@@ -68,9 +68,9 @@ public class UserService {
     }
 
     public void deleteUser( long token) {
-        Long id=getIDFromToken(token);
-        if (id !=null) {
-            Optional<User> user = repository.getUserById(getIDFromToken(id));
+        Long id = getIDFromToken(token);
+        if (id != null) {
+            Optional<User> user = repository.getUserById(id);
             if (user.isPresent()) {
                 repository.deleteUser(user.get());
 

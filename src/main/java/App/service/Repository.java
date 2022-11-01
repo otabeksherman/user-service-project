@@ -35,6 +35,7 @@ public class Repository {
         Gson gson = new Gson();
         String filePath = USERS_REPO_PATH + user.getId();
         try(FileWriter fileWriter = new FileWriter(filePath)) {
+            users.put(user.getId(), user);
             gson.toJson(user, fileWriter);
             fileWriter.flush();
         } catch (IOException e) {
