@@ -15,14 +15,14 @@ public class Main {
         //login
         Long token=AuthController.login ("avi@gmail.com","Avi123456");
         //update name:
-        UserController.updateUserName(id, token,"Ron");
+        UserController.updateUserName(token,"Ron");
         //update email:
-        UserController.updateUserEmail(id, token,"Ron@gmail.com");
+        UserController.updateUserEmail(token,"Ron@gmail.com");
         //update password:
-        UserController.updateUserPassword(id, token,"Ron123456");
+        UserController.updateUserPassword( token,"Ron123456");
 
         //delete user:
-        UserController.deleteUser(id, token);
+        UserController.deleteUser(token);
 
     }
 }

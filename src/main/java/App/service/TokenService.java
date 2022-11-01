@@ -13,6 +13,10 @@ public class TokenService {
         return tokenToUserIdMap.get(token) == id;
     }
 
+     static Long getIDFromToken(Long token){
+        return tokenToUserIdMap.get(token);
+    }
+
     void removeSession(long token) {
         tokenToUserIdMap.remove(token);
     }
