@@ -1,12 +1,19 @@
 package App.controller;
 
+import App.utilities.Debugger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class UtilController {
-     static boolean checkEmailValid(String email){
+    private static Logger logger = LogManager.getLogger(UtilController.class.getName());
+
+    static boolean checkEmailValid(String email){
         if (email == null) {
-            System.out.println("Email field is empty");
+            logger.warn("Email field is empty");
+            //System.out.println("Email field is empty");
             return false;
         }
         return  checkRegex("^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^-]+(?:\\.[a-zA-Z0-9_!#$%&'*+/=?`{|}~^-]+)*@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*$"
@@ -14,7 +21,8 @@ public class UtilController {
     }
      static  boolean checkNameValid(String name){
         if (name == null) {
-            System.out.println("App.User name field is empty");
+            logger.warn("App.User name field is empty");
+            //System.out.println("App.User name field is empty");
             return false;
         }
         return  checkRegex("[A-Z]+[a-z]+",name);
@@ -22,7 +30,8 @@ public class UtilController {
 
     static boolean checkPasswordValid(String password) {
         if (password == null) {
-            System.out.println("password field is empty");
+            logger.warn("password field is empty");
+            //System.out.println("password field is empty");
             return false;
         }
         return checkRegex("^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$", password);//regex expression: at least 8 character 1 letter and 1 digit

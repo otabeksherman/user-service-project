@@ -1,7 +1,11 @@
 package App.service;
 
 import App.User;
+import App.controller.UserController;
+import App.utilities.Debugger;
 import com.google.gson.Gson;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.*;
 import java.nio.file.Files;
@@ -12,6 +16,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class Repository {
+    private static Logger logger = LogManager.getLogger(Repository.class.getName());
 
     private static Repository instance;
 
@@ -19,6 +24,7 @@ public class Repository {
 
     public static Repository getInstance() {
         if (instance == null) {
+            logger.info("new Repository is created!");
             instance = new Repository();
         }
         return instance;
@@ -38,7 +44,9 @@ public class Repository {
             users.put(user.getId(), user);
             gson.toJson(user, fileWriter);
             fileWriter.flush();
+            logger.info("write user to Repository");
         } catch (IOException e) {
+            logger.error(e);
             throw new RuntimeException(e);
         }
     }
@@ -70,6 +78,7 @@ public class Repository {
         try {
             return Files.deleteIfExists(path);
         } catch (IOException e) {
+            logger.error(e);
             throw new RuntimeException(e);
         }
     }
@@ -94,6 +103,7 @@ public class Repository {
                 User user = gson.fromJson(stringBuilder.toString(), User.class);
                 this.users.put(user.getId(), user);
             } catch (IOException e) {
+                Thread.dumpStack();
                 throw new RuntimeException(e);
             }
         }
@@ -106,6 +116,7 @@ public class Repository {
                     .map(Path::toString)
                     .collect(Collectors.toList());
         } catch (IOException e) {
+            Thread.dumpStack();
             throw new RuntimeException(e);
         }
         return Optional.of(paths);

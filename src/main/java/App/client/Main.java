@@ -10,7 +10,7 @@ public class Main {
     public static void main(String[] args) {
 
         //register new user
-        AuthController.registerNewUser("avi@gmail.com","Avi","Avi123456");
+        AuthController.registerNewUser("avi@gmail.com","Avi11","Avi123456");
         AuthController.registerNewUser("yossi@gmail.com","Yossi","Yos123456");
 
         //login

@@ -1,7 +1,10 @@
 package App.service;
 
 import App.User;
+import App.utilities.Debugger;
 import App.utilities.UniqueNumber;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -11,6 +14,8 @@ import java.util.Set;
 import static App.service.TokenService.getIDFromToken;
 
 public class UserService {
+    private static Logger logger = LogManager.getLogger(UserService.class.getName());
+
 
     private Repository repository = Repository.getInstance();
     private HashMap<Long, Long> userIdTokenMap = new HashMap<>();
@@ -27,16 +32,16 @@ public class UserService {
                 User updatedUser = new User(user.get().getId(),
                         user.get().getEmail(), newName, user.get().getPassword());
                 repository.updateUser(updatedUser);
-                System.out.println("User Name updated successfully");
+                logger.info("User Name updated successfully");
             } else {
-                System.out.println("Can't update name");
+                logger.error("Can't update name");
             }
         } else {
-            System.out.println("The token is invalid");
+            logger.error("The token is invalid");
         }
     }
 
-    public void updateEmail( long token, String newEmail) {
+    public void updateEmail(long token, String newEmail) {
         Long id = getIDFromToken(token);
         if (id != null) {
             Optional<User> user = repository.getUserById(id);
@@ -44,16 +49,16 @@ public class UserService {
                 User updatedUser = new User(user.get().getId(),
                         newEmail, user.get().getName(), user.get().getPassword());
                 repository.updateUser(updatedUser);
-                System.out.println("User Email updated successfully");
+                logger.info("User Email updated successfully");
             } else {
-                System.out.println("Can't update email");
+                logger.fatal("Can't update email");
             }
         } else {
-            System.out.println("The token is invalid");
+            logger.fatal("The token is invalid");
         }
     }
 
-    public void userUpdatePassword( long token, String newPassword) {
+    public void userUpdatePassword(long token, String newPassword) {
         Long id = getIDFromToken(token);
         if (id != null) {
             Optional<User> user = repository.getUserById(id);
@@ -61,28 +66,28 @@ public class UserService {
                 User updatedUser = new User(user.get().getId(),
                         user.get().getEmail(), user.get().getName(), newPassword);
                 repository.updateUser(updatedUser);
-                System.out.println("User Password updated successfully");
+                logger.info("User Password updated successfully");
             } else {
-                System.out.println("Can't update password");
+                logger.fatal("Can't update password");
             }
         } else {
-            System.out.println("The token is invalid");
+            logger.fatal("The token is invalid");
         }
     }
 
-    public void deleteUser( long token) {
+    public void deleteUser(long token) {
         Long id = getIDFromToken(token);
         if (id != null) {
             Optional<User> user = repository.getUserById(id);
             if (user.isPresent()) {
-                if (repository.deleteUser(user.get())){
-                    System.out.println("User Account deleted successfully");
+                if (repository.deleteUser(user.get())) {
+                    logger.info("User Account deleted successfully");
                 }
             } else {
-                System.out.println("Can't delete user.");
+                logger.warn("Can't delete user.");
             }
         } else {
-            System.out.println("The token is invalid");
+            logger.error("The token is invalid");
         }
     }
 }
